@@ -21,23 +21,43 @@ public class Main {
         EntityManagerFactory entityManagerFactory =
                 Persistence.createEntityManagerFactory("persistence-unit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
+        //EntityTransaction transaction = entityManager.getTransaction();
 
         // CREATE PRODUCT
-        createProduct(entityManager, transaction);
+        //createProduct(entityManager, transaction);
+
+        // READ
+        readProduct(entityManager, 5);
 
 
     }
-
+        // CREATE
     public static void createProduct(EntityManager entityManager, EntityTransaction transaction) {
-        Product prd1 = new Product(0, "Iphone 6", 2500.99, 44, new Date(), null);
-        Product prd2 = new Product(0, "Iphone 7", 1500.99, 33, new Date(), null);
-        Product prd3 = new Product(0, "Iphone 8", 3500.99, 156, new Date(), null);
+        Product prd1 = new Product(0, "Iphone 11", 4500.99, 15, new Date(), null);
+        Product prd2 = new Product(0, "Iphone 12", 5500.99, 12, new Date(), null);
+        Product prd3 = new Product(0, "Iphone 13", 6500.99, 10, new Date(), null);
         transaction.begin();
         entityManager.persist(prd1);
         entityManager.persist(prd2);
         entityManager.persist(prd3);
         transaction.commit();
+    }
+
+
+    // READ
+    public static void readProduct(EntityManager entityManager,int searchWithID) {
+        Product prd = entityManager.find(Product.class,searchWithID);
+
+        if( prd != null){
+            System.out.println("Ürün ID: " + prd.getProductId());
+            System.out.println("Ürün adı: " + prd.getProductName());
+            System.out.println("Ürün fiyatı: " + prd.getProductPrice());
+            System.out.println("Ürün adeti: " + prd.getProductCount());
+            System.out.println("Ürün eklenme tarih: " + prd.getProductAddDate());
+        } else {
+            System.out.println("Aranılan ürün bulunamadı!");
+        }
+
     }
 
     public static void createDB() {
