@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.transaction.Transaction;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,13 +22,16 @@ public class Main {
         EntityManagerFactory entityManagerFactory =
                 Persistence.createEntityManagerFactory("persistence-unit");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        //EntityTransaction transaction = entityManager.getTransaction();
+        EntityTransaction transaction = entityManager.getTransaction();
 
         // CREATE PRODUCT
         //createProduct(entityManager, transaction);
 
         // READ
-        readProduct(entityManager, 5);
+       // readProduct(entityManager, 5);
+
+        // UPDATE
+        //updateProduct(entityManager, transaction, 4);
 
 
     }
@@ -59,6 +63,30 @@ public class Main {
         }
 
     }
+
+    // UPDATE
+    public static void updateProduct(EntityManager entityManager, EntityTransaction tsc, int prdID) {
+        Product prd = entityManager.find(Product.class, prdID);
+
+        if (prd != null ) {
+            prd.setProductName("iPHONE 11");
+            prd.setProductPrice(76000.45);
+            prd.setProductUpdateDate(new Date());
+            prd.setProductCount(2500);
+
+            tsc.begin();
+            entityManager.merge(prd);
+            tsc.commit();
+        } else {
+            System.out.println("Güncellenecek ürün bulunamadı!");
+        }
+
+    }
+
+
+
+
+
 
     public static void createDB() {
 
