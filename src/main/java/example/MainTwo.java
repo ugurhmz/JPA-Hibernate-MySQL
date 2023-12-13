@@ -17,8 +17,21 @@ public class MainTwo {
     Book book2 = new Book(0,"Harry Potter", 2500,
                 "lorem ipsum","J. K. Rowling", dateFormatter(26,04,1994));
 
-    bookRepository.save(book1);
-    bookRepository.save(book2);
+    // CREATE
+        // bookRepository.save(book1);
+        // bookRepository.save(book2);
+
+    // Read
+        Book thatBook = bookRepository.find(2);
+        if ( thatBook != null) {
+            System.out.println(thatBook);
+        } else {
+            System.out.println("Kitap bulunamadı!");
+        }
+
+    // UPDATE
+        thatBook.setTopic("New Updated Topic");
+        bookRepository.update(thatBook);
 
     }
 
