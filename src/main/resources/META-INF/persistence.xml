@@ -5,8 +5,9 @@
              version="2.1">
 
     <persistence-unit name="persistence-unit" transaction-type="RESOURCE_LOCAL">
-        <class>org.example.Student</class>
-        <class>org.example.Product</class>
+      <!--  <class>org.example.Student</class>
+        <class>org.example.Product</class> -->
+        <class>example.entity.Book</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
@@ -15,12 +16,12 @@
             <property name="javax.persistence.jdbc.password" value="1994ugur"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
-        <!--    <property name="hibernate.hbm2ddl.auto" value="create"/> -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <property name="current_session_context_class" value="thread"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-        </properties>
-    </persistence-unit>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <!-- <property name="hibernate.hbm2ddl.auto" value="update"/>-->
+             <property name="current_session_context_class" value="thread"/>
+             <property name="hibernate.show_sql" value="true"/>
+             <property name="hibernate.format_sql" value="true"/>
+         </properties>
+     </persistence-unit>
 
-</persistence>
+ </persistence>
