@@ -33,6 +33,9 @@ public class Main {
         // UPDATE
         //updateProduct(entityManager, transaction, 4);
 
+        // DELETE
+        deleteProduct(entityManager, transaction, 3);
+
 
     }
         // CREATE
@@ -84,7 +87,23 @@ public class Main {
     }
 
 
+    // DELETE
+    public static void deleteProduct(EntityManager entityManager, EntityTransaction tsc, int prdID) {
+        Product prd = entityManager.find(Product.class, prdID);
 
+        try {
+            if (prd != null) {
+                tsc.begin();
+                entityManager.remove(prd);
+                tsc.commit();
+                System.out.println("Ürün başarıyla silindi.");
+            } else {
+                System.out.println("Silinecek Ürün bulunamadı!");
+            }
+        } catch (Exception e) {
+            System.out.println("Ürün silme işlemi başarısız oldu. Hata: " + e.getMessage());
+        }
+    }
 
 
 
