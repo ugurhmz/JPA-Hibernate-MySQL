@@ -30,9 +30,11 @@ public class MainTwo {
         }
 
     // UPDATE
-        thatBook.setTopic("New Updated Topic");
-        bookRepository.update(thatBook);
+       // thatBook.setTopic("New Updated Topic");
+       // bookRepository.update(thatBook);
 
+    // DELETE
+        bookRepository.delete(thatBook);
     }
 
     public static Date dateFormatter(int day, int month, int year) {
